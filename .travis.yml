@@ -1,0 +1,31 @@
+language: cpp
+sudo: required
+dist: trusty
+compiler: gcc
+before_install:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update         ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install python3; fi
+script: cd armips && ../build.sh && cd ../pokeruby && ./build_tools.sh && cd .. && python3 download.py
+env:
+- BUILD_ARCH=x86
+- BUILD_ARCH=x64
+os:
+- linux
+- osx
+matrix:
+  exclude:
+  - os: osx
+    env: BUILD_ARCH=x86
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+    - g++-multilib
+deploy:
+  provider: bintray
+  file: bintray.json
+  user: touched
+  key:
+    secure: MAH4ySWAZox6FDr013S7+0oOK2VYvGnzIPAukHlGvq2rry8P7FsdTeFDJA93rzAvoDV7l6GFe2+SvpXebk19LJ6J1sDt0Hx38B/tSagDdT5PjEILLULw2NYWZqI6sCQn4W/h6PYk0o3OP3Gt1PbAiG31I7W+ufLFTSj4nVtaNRA459azLJN1HDGbfRyU9zwMVtuVqdP+taH0JDBcw5S/NYkwLdtnE3krDGiHTx2jGW67tY/K3b0P4tYcrS2p0ShbZwcdnoc3u1S0C9NJY2GxobUhkaX+tZ5EBnNxVU5aG4upEi3/Nmv21K4zDrCQ3lqOKtLVicXXI1GV7kUGWiKqjPlDbI2rSRqIGeftFVRlzI4RxntvBkvbfXSyzXd/yXJjf/kLrxIgjxTjdMDxup2+JGKLPU0YUgLRy6DRJreRIfHY74xau7XWMfN9DFFYCFW9tNUalXulX2ToyKtXnpP26+LX8xpCsU9CTlJoXxhE17xs0zUWramF/ezrOmRhwU04I/Ay95BYAineKkVNXXqWJwF+rlGGdix9OP5u1nkgecbZ+9fuNYBBROHdBlyDif9tobdyaf4vIL1m24jhToEuBsqS0M87GPmv8GMJri9+GSVsEaeAh5G0JZWrv/vz0Bh3Iu6psHXazdR43apCF/lRBvudxF7N4+2DwUb7ubhnxuo=

@@ -1,0 +1,25 @@
+platform:
+  - Win32
+configuration:
+  - Release
+install:
+  - git submodule update --init --recursive
+build:
+  project: armips\armips.sln
+after_build:
+  - C:\Python36\python.exe download.py
+artifacts:
+  path: agbhack-tools-win32.tar.xz
+  name: agbhack-tools
+deploy:
+  - provider: BinTray
+    username: touched
+    api_key:
+      secure: 0xW6/yHvT4GF0Iy2AEXWBTlFa3FJ7CzMgXJ6xy2HJQnZog3bHkNudKTiLqJZadvX
+    subject: touched
+    repo: agbhack
+    package: tools
+    version: v0.1
+    publish: true
+    override: true
+    artifact: agbhack-tools-win32.tar.xz

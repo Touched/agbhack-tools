@@ -1,0 +1,9 @@
+[submodule "pokeruby-tools"]
+	path = pokeruby-tools
+	url = https://github.com/pret/pokeruby-tools
+[submodule "armips"]
+	path = armips
+	url = https://github.com/Kingcom/armips
+[submodule "pokeruby"]
+	path = pokeruby
+	url = https://github.com/pret/pokeruby

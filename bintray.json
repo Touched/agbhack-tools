@@ -1,0 +1,15 @@
+{
+  "package": {
+    "name": "tools",
+    "repo": "agbhack",
+    "subject": "touched"
+  },
+  "version": {
+    "name": "v0.1"
+  },
+  "files": [{
+    "includePattern": "./(agbhack-tools-.*\.tar\.xz)",
+    "uploadPattern": "$1"
+  }],
+  "publish": true
+}
